@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -15,9 +14,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.example.komikverse.R
-import com.example.komikverse.adapter.BannerAdapter
 import com.example.komikverse.adapter.ComicAdapter
-import com.example.komikverse.adapter.ComicListAdapter
 import com.example.komikverse.api.ComicService
 import com.example.komikverse.api.ServiceBuilder
 import com.example.komikverse.databinding.FragmentListBinding
@@ -29,7 +26,6 @@ import retrofit2.Response
 class ListFragment : Fragment() {
 
     private var _binding: FragmentListBinding? = null
-    private var ComicListAdapter: RecyclerView.Adapter<ComicListAdapter.ViewHolder>? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.

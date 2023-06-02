@@ -55,7 +55,10 @@ class ChapterAdapter(private val comic: Comic, private val chapterList: List<Cha
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        viewHolder.chapterBtn.text = chapterList[i].title
+        viewHolder.chapterBtn.text = "Chapter ${chapterList[i].index}"
+        chapterList[i].title?.let {
+            viewHolder.chapterBtn.text = "${viewHolder.chapterBtn.text} - ${chapterList[i].title}"
+        }
         Log.d("RESPONSE", "onBindViewHolder: ${chapterList[i]}")
     }
 
