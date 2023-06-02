@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="125dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="12dp"
     app:cardCornerRadius="12dp"
     android:elevation="8dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/stroke"
     android:id="@+id/rvItem">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="24dp"
+        android:padding="16dp"
         android:gravity="left|center_vertical">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="112dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="4dp"
             android:elevation="4dp">
             <ImageView
                 android:id="@+id/tvImage"
@@ -33,7 +35,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="4dp"
+            android:paddingLeft="8dp"
             android:orientation="vertical">
 
             <TextView
@@ -43,7 +45,7 @@
                 android:gravity="left"
                 android:text="Solo Leveling"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -96,4 +98,4 @@
     </LinearLayout>
 
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

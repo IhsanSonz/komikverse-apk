@@ -1,4 +1,4 @@
-package com.example.komikverse
+package com.example.komikverse.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,54 +7,48 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.komikverse.R
+import com.example.komikverse.models.Comic
 
 
 class BannerAdapter : RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
     private val comicList: ArrayList<Comic> = arrayListOf(
         Comic(
-            id = "6473898cd50f5ef9a9c27ae6",
+            _id = "6473898cd50f5ef9a9c27ae6",
             title = "Solo Leveling Side Story",
             author = "Dubu",
             desc = "Side story of Solo Leveling manhwa",
-            thumbUrl = null
+            thumb_url = "https://i.ibb.co/Xt72xHm/solo-Leveling-Cover02.png",
         ),
         Comic(
-            id = "6473898cd50f5ef9a9c27ae6",
+            _id = "6473898cd50f5ef9a9c27ae6",
             title = "Solo Leveling Side Story",
             author = "Dubu",
             desc = "Side story of Solo Leveling manhwa",
-            thumbUrl = null
+            thumb_url = "https://i.ibb.co/Xt72xHm/solo-Leveling-Cover02.png",
         ),
         Comic(
-            id = "6473898cd50f5ef9a9c27ae6",
+            _id = "6473898cd50f5ef9a9c27ae6",
             title = "Solo Leveling Side Story",
             author = "Dubu",
             desc = "Side story of Solo Leveling manhwa",
-            thumbUrl = null
+            thumb_url = "https://i.ibb.co/Xt72xHm/solo-Leveling-Cover02.png",
         ),
         Comic(
-            id = "6473898cd50f5ef9a9c27ae6",
+            _id = "6473898cd50f5ef9a9c27ae6",
             title = "Solo Leveling Side Story",
             author = "Dubu",
             desc = "Side story of Solo Leveling manhwa",
-            thumbUrl = null
+            thumb_url = "https://i.ibb.co/Xt72xHm/solo-Leveling-Cover02.png",
         ),
         Comic(
-            id = "6473898cd50f5ef9a9c27ae6",
+            _id = "6473898cd50f5ef9a9c27ae6",
             title = "Solo Leveling Side Story",
             author = "Dubu",
             desc = "Side story of Solo Leveling manhwa",
-            thumbUrl = null
-        ),
-        Comic(
-            id = "6473898cd50f5ef9a9c27ae6",
-            title = "Solo Leveling Side Story",
-            author = "Dubu",
-            desc = "Side story of Solo Leveling manhwa",
-            thumbUrl = null
+            thumb_url = "https://i.ibb.co/Xt72xHm/solo-Leveling-Cover02.png",
         ),
     )
-
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var tvTitle: TextView
@@ -67,14 +61,7 @@ class BannerAdapter : RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
             itemView.setOnClickListener {
                 var position: Int = getAdapterPosition()
                 val context = itemView.context
-                Log.d("INFO", "recycleView itemOnClick: ${position}")
-//                val intent = Intent(context, DetailPertanyaan::class.java).apply {
-//                    putExtra("NUMBER", position)
-//                    putExtra("CODE", itemKode.text)
-//                    putExtra("CATEGORY", itemKategori.text)
-//                    putExtra("CONTENT", itemIsi.text)
-//                }
-//                context.startActivity(intent)
+                Log.d("INFO", "recycleView itemOnClick: ${comicList[position]._id} [${position}]")
             }
         }
     }
@@ -82,6 +69,7 @@ class BannerAdapter : RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         val v = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.rv_item, viewGroup, false)
+
         return ViewHolder(v)
     }
 

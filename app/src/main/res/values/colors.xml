@@ -10,4 +10,6 @@
     <color name="main">#F9C200</color>
     <color name="secondary">#8C52FF</color>
     <color name="accent">#FC3F1C</color>
+    <color name="red">#FF0000</color>
+    <color name="stroke">#E2E2E2</color>
 </resources>
