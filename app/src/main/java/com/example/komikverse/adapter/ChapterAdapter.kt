@@ -7,22 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.komikverse.ChapterActivity
 import com.example.komikverse.R
+import com.example.komikverse.databinding.ChapterItemBinding
+import com.example.komikverse.databinding.RvItemBinding
 import com.example.komikverse.models.Chapter
 import com.example.komikverse.models.Comic
+import com.example.komikverse.ui.home.HomeFragmentDirections
 import com.squareup.picasso.Picasso
 import java.io.Serializable
 
 class ChapterAdapter(private val comic: Comic, private val chapterList: List<Chapter>) : RecyclerView.Adapter<ChapterAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(binding: ChapterItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         var chapterBtn: Button
 
         init {
-            chapterBtn = itemView.findViewById(R.id.chapterBtn)
+            chapterBtn = binding.chapterBtn
 
             chapterBtn.setOnClickListener {
                 var position: Int = adapterPosition
@@ -31,17 +35,6 @@ class ChapterAdapter(private val comic: Comic, private val chapterList: List<Cha
                 val intent = Intent(context, ChapterActivity::class.java).apply {
                     putExtra("comic", comic)
                     putExtra("chapter", chapterList[position])
-
-                    if (chapterList.size == position+1) {
-                        Log.d("CHAPTER", "nextChapter: not available")
-                    } else {
-                        putExtra("nextChapter", chapterList[position+1])
-                    }
-                    if (position-1 == -1) {
-                        Log.d("CHAPTER", "prevChapter: not available")
-                    } else {
-                        putExtra("prevChapter", chapterList[position-1])
-                    }
                 }
                 context.startActivity(intent)
             }
@@ -49,8 +42,8 @@ class ChapterAdapter(private val comic: Comic, private val chapterList: List<Cha
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ChapterAdapter.ViewHolder {
-        val v = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.chapter_item, viewGroup, false)
+        val v = ChapterItemBinding
+            .inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ViewHolder(v)
     }
 

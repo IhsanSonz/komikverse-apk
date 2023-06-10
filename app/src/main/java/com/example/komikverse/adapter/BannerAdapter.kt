@@ -2,12 +2,13 @@ package com.example.komikverse.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.komikverse.R
+import com.example.komikverse.databinding.ComicItemBinding
+import com.example.komikverse.databinding.RvItemBinding
 import com.example.komikverse.models.Comic
 
 
@@ -49,26 +50,25 @@ class BannerAdapter : RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
             thumb_url = "https://i.ibb.co/Xt72xHm/solo-Leveling-Cover02.png",
         ),
     )
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(binding: RvItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         var tvTitle: TextView
         var tvImage: ImageView
 
         init {
-            tvTitle = itemView.findViewById(R.id.tvTitle)
-            tvImage = itemView.findViewById(R.id.tvImage)
+            tvTitle = binding.tvTitle
+            tvImage = binding.tvImage
 
             itemView.setOnClickListener {
                 var position: Int = getAdapterPosition()
-                val context = itemView.context
                 Log.d("INFO", "recycleView itemOnClick: ${comicList[position]._id} [${position}]")
             }
         }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
-        val v = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.rv_item, viewGroup, false)
+        val v = RvItemBinding
+            .inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
         return ViewHolder(v)
     }

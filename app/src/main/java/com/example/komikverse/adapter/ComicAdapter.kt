@@ -3,45 +3,48 @@ package com.example.komikverse.adapter
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.komikverse.ComicActivity
-import com.example.komikverse.R
+import com.example.komikverse.databinding.ComicItemBinding
 import com.example.komikverse.models.Comic
+import com.example.komikverse.ui.home.HomeFragmentDirections
 import com.squareup.picasso.Picasso
 
 
 class ComicAdapter(private val comicList: List<Comic>) : RecyclerView.Adapter<ComicAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(binding: ComicItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         var tvTitle: TextView
         var tvImage: ImageView
         var tvDesc: TextView
 
         init {
-            tvTitle = itemView.findViewById(R.id.tvTitle)
-            tvImage = itemView.findViewById(R.id.tvImage)
-            tvDesc = itemView.findViewById(R.id.tvDesc)
+            tvTitle = binding.tvTitle
+            tvImage = binding.tvImage
+            tvDesc = binding.tvDesc
 
             itemView.setOnClickListener {
                 var position: Int = adapterPosition
                 val context = itemView.context
                 Log.d("INFO", "recycleView itemOnClick: $position")
-                val intent = Intent(context, ComicActivity::class.java).apply {
-                    putExtra("comic", comicList[position])
-                }
-                context.startActivity(intent)
+
+                val passData = HomeFragmentDirections.actionNavigationHomeToComicActivity(
+                    comicList[position]
+                )
+                it.findNavController().navigate(passData)
             }
         }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
-        val v = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.comic_item, viewGroup, false)
+        val v = ComicItemBinding
+            .inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ViewHolder(v)
     }
 

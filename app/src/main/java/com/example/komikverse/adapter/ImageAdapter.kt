@@ -9,6 +9,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.komikverse.R
+import com.example.komikverse.databinding.ComicItemBinding
+import com.example.komikverse.databinding.ImageItemBinding
 import com.example.komikverse.models.Chapter
 import com.example.komikverse.models.Comic
 import com.example.komikverse.models.Image
@@ -20,17 +22,17 @@ class ImageAdapter(
     private val imageList: List<Image>,
     ) : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(binding: ImageItemBinding) : RecyclerView.ViewHolder(binding.root) {
         var context: Context = itemView.context
         var tvImage: ImageView
         init {
-            tvImage = itemView.findViewById(R.id.tvImage)
+            tvImage = binding.tvImage
         }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ImageAdapter.ViewHolder {
-        val v = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.image_item, viewGroup, false)
+        val v = ImageItemBinding
+            .inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ViewHolder(v)
     }
 

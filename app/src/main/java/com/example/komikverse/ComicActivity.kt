@@ -10,6 +10,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.navArgs
+import androidx.navigation.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +32,7 @@ class ComicActivity : AppCompatActivity() {
     private lateinit var comic: Comic;
 
     private lateinit var binding: ActivityComicBinding
+    private val args: ComicActivityArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +41,7 @@ class ComicActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //show back button
 
-        comic = intent.getSerializableExtra("comic") as Comic
+        comic = args.comic
         Log.d("RESPONSE", "onCreate: $comic")
 
         val tvTitle: TextView = binding.tvTitle
