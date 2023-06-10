@@ -1,6 +1,5 @@
 package com.example.komikverse
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,16 +7,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
 import com.example.komikverse.adapter.ImageAdapter
 import com.example.komikverse.api.ComicService
 import com.example.komikverse.api.ServiceBuilder
+import com.example.komikverse.databinding.ActivityChapterBinding
 import com.example.komikverse.models.Chapter
 import com.example.komikverse.models.Comic
 import com.example.komikverse.models.Image
@@ -32,9 +29,12 @@ class ChapterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     private lateinit var comic: Comic;
     private lateinit var chapter: Chapter;
 
+    private lateinit var binding: ActivityChapterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chapter)
+        binding = ActivityChapterBinding.inflate(layoutInflater) //initializing the binding class
+        setContentView(binding.root) // we now set the contentview as the binding.root
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //show back button
 
@@ -43,7 +43,7 @@ class ChapterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         chapter = intent.getSerializableExtra("chapter") as Chapter
         Log.d("CHAPTER", "onCreate: chapter = $chapter")
 
-        spinner = findViewById(R.id.langSpinner)
+        spinner = binding.langSpinner
         ArrayAdapter.createFromResource(
             this@ChapterActivity,
             R.array.lang_array,
@@ -64,8 +64,8 @@ class ChapterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
 
     private fun loadImages() {
         //initiate the service
-        val loader: LinearLayout = findViewById(R.id.loader)
-        val verticalRv: RecyclerView = findViewById(R.id.verticalRv)
+        val loader: LinearLayout = binding.loader
+        val verticalRv: RecyclerView = binding.verticalRv
 
         loader.visibility = View.VISIBLE
         verticalRv.visibility = View.GONE
@@ -85,10 +85,10 @@ class ChapterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
                         adapter = ImageAdapter(comic, chapter, response.body()!!)
                     }
                     if (imageList.isEmpty()) {
-                        findViewById<LinearLayout>(R.id.noImage).visibility = View.VISIBLE
+                        binding.noImage.visibility = View.VISIBLE
                     } else {
                         verticalRv.visibility = View.VISIBLE
-                        findViewById<LinearLayout>(R.id.noImage).visibility = View.GONE
+                        binding.noImage.visibility = View.GONE
                     }
                 }else{
                     Toast.makeText(this@ChapterActivity, "Something went wrong ${response.message()}", Toast.LENGTH_SHORT).show()
@@ -97,7 +97,7 @@ class ChapterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
             }
             override fun onFailure(call: Call<List<Image>>, t: Throwable) {
                 loader.visibility = View.GONE
-                findViewById<LinearLayout>(R.id.noImage).visibility = View.VISIBLE
+                binding.noImage.visibility = View.VISIBLE
                 Toast.makeText(this@ChapterActivity, "Something went wrong $t", Toast.LENGTH_SHORT).show()
             }
         })
@@ -105,8 +105,8 @@ class ChapterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
 
     private fun loadPrevNext() {
         //initiate the service
-        val prevBtn: MaterialButton = findViewById(R.id.prevBtn)
-        val nextBtn: MaterialButton = findViewById(R.id.nextBtn)
+        val prevBtn: MaterialButton = binding.prevBtn
+        val nextBtn: MaterialButton = binding.nextBtn
 
         prevBtn.visibility = View.GONE
         nextBtn.visibility = View.GONE

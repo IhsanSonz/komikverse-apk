@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.SnapHelper
 import com.example.komikverse.adapter.BannerAdapter
 import com.example.komikverse.models.Comic
 import com.example.komikverse.adapter.ComicAdapter
-import com.example.komikverse.R
 import com.example.komikverse.api.ComicService
 import com.example.komikverse.api.ServiceBuilder
 import com.example.komikverse.databinding.FragmentHomeBinding
@@ -52,7 +51,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
-        val horizontalRv: RecyclerView = itemView.findViewById(R.id.horizontalRv)
+        val horizontalRv: RecyclerView = binding.horizontalRv
         horizontalRv.apply {
             // set a LinearLayoutManager to handle Android
             // RecyclerView behavior
@@ -74,8 +73,8 @@ class HomeFragment : Fragment() {
 
     private fun loadComics(itemView: View) {
         //initiate the service
-        val loaderComics: LinearLayout = itemView.findViewById(R.id.loaderComics)
-        val verticalRv: RecyclerView = itemView.findViewById(R.id.verticalRv)
+        val loaderComics: LinearLayout = binding.loaderComics
+        val verticalRv: RecyclerView = binding.verticalRv
 
         loaderComics.visibility = View.VISIBLE
         verticalRv.visibility = View.GONE

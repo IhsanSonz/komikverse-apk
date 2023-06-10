@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
-import com.example.komikverse.R
 import com.example.komikverse.adapter.ComicAdapter
 import com.example.komikverse.api.ComicService
 import com.example.komikverse.api.ServiceBuilder
@@ -58,8 +57,8 @@ class ListFragment : Fragment() {
 
     private fun loadComics(itemView: View) {
         //initiate the service
-        val loaderComics: LinearLayout = itemView.findViewById(R.id.loaderComics)
-        val verticalRv: RecyclerView = itemView.findViewById(R.id.verticalRv)
+        val loaderComics: LinearLayout = binding.loaderComics
+        val verticalRv: RecyclerView = binding.verticalRv
 
         loaderComics.visibility = View.VISIBLE
         verticalRv.visibility = View.GONE

@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.SnapHelper
 import com.example.komikverse.adapter.ChapterAdapter
 import com.example.komikverse.api.ComicService
 import com.example.komikverse.api.ServiceBuilder
+import com.example.komikverse.databinding.ActivityChapterBinding
+import com.example.komikverse.databinding.ActivityComicBinding
 import com.example.komikverse.models.Chapter
 import com.example.komikverse.models.Comic
 import com.squareup.picasso.Picasso
@@ -26,22 +28,26 @@ import retrofit2.Response
 
 class ComicActivity : AppCompatActivity() {
     private lateinit var comic: Comic;
+
+    private lateinit var binding: ActivityComicBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_comic)
+        binding = ActivityComicBinding.inflate(layoutInflater) //initializing the binding class
+        setContentView(binding.root) // we now set the contentview as the binding.root
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //show back button
 
         comic = intent.getSerializableExtra("comic") as Comic
         Log.d("RESPONSE", "onCreate: $comic")
 
-        val tvTitle: TextView = findViewById(R.id.tvTitle)
+        val tvTitle: TextView = binding.tvTitle
         tvTitle.text = comic.title
-        val tvAuthor: TextView = findViewById(R.id.tvAuthor)
+        val tvAuthor: TextView = binding.tvAuthor
         tvAuthor.text = comic.author
-        val tvDesc: TextView = findViewById(R.id.tvDesc)
+        val tvDesc: TextView = binding.tvDesc
         tvDesc.text = comic.desc
-        val tvImage: ImageView = findViewById(R.id.tvImage)
+        val tvImage: ImageView = binding.tvImage
         Picasso.get().load(comic.thumb_url).into(tvImage)
         loadChapters()
     }
@@ -53,9 +59,9 @@ class ComicActivity : AppCompatActivity() {
 
     private fun loadChapters() {
         //initiate the service
-        val loader: LinearLayout = findViewById(R.id.loader)
-        val verticalRv: RecyclerView = findViewById(R.id.verticalRv)
-        val tvChapter: TextView = findViewById(R.id.tvChapter)
+        val loader: LinearLayout = binding.loader
+        val verticalRv: RecyclerView = binding.verticalRv
+        val tvChapter: TextView = binding.tvChapter
 
         loader.visibility = View.VISIBLE
         verticalRv.visibility = View.GONE
